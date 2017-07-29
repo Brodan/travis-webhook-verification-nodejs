@@ -1,0 +1,16 @@
+{
+  "name": "travis-webhook-verification-nodejs",
+  "version": "1.0.0",
+  "description": "Sample apps for verifying incoming Travis CI webhook notifications.",
+  "scripts": {
+    "hapi": "node hapi",
+    "express": "node express"
+  },
+  "author": "brodan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "got": "^7.1.0",
+    "hapi": "^16.5.0"
+  }
+}
