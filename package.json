@@ -9,6 +9,7 @@
   "author": "brodan",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "got": "^7.1.0",
     "hapi": "^16.5.0"
