@@ -9,19 +9,19 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/travis', function (req, res) {
-  var travis_signature = Buffer.from(req.headers.signature, 'base64');
-  var payload = req.body.payload;
-  var status = false;
+  let travisSignature = Buffer.from(req.headers.signature, 'base64');
+  let payload = req.body.payload;
+  let status = false;
 
   got('https://api.travis-ci.org/config', {
       timeout: 10000
   })
   .then(response => {
-    var travis_public_key =
+    let travisPublicKey =
       JSON.parse(response.body).config.notifications.webhook.public_key;
-    var verifier = crypto.createVerify('sha1');
+    let verifier = crypto.createVerify('sha1');
     verifier.update(payload);
-    status = verifier.verify(travis_public_key, travis_signature);
+    status = verifier.verify(travisPublicKey, travisSignature);
   })
   .catch(error => {
     throw error;

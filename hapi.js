@@ -15,18 +15,18 @@ server.route({
   method: 'POST',
   path:'/travis',
   handler: function (request, reply) {
-    var travis_signature = Buffer.from(request.headers.signature, 'base64');
-    var payload = request.payload.payload;
-    var status = false;
+    let travisSignature = Buffer.from(request.headers.signature, 'base64');
+    let payload = request.payload.payload;
+    let status = false;
     
     got('https://api.travis-ci.org/config', {
       timeout: 10000
     })
     .then(response => {
-      let travis_public_key = JSON.parse(response.body).config.notifications.webhook.public_key;
+      let travisPublicKey = JSON.parse(response.body).config.notifications.webhook.public_key;
       let verifier = crypto.createVerify('sha1');
       verifier.update(payload);
-      status = verifier.verify(travis_public_key, travis_signature);
+      status = verifier.verify(travisPublicKey, travisSignature);
     })
     .catch(error => {
       throw error;
