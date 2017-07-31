@@ -29,7 +29,7 @@ server.route({
       status = verifier.verify(travisPublicKey, travisSignature);
     })
     .catch(error => {
-      throw error;
+      console.log('Something went wrong:\n' + error)
     })
     .then(() => {
       if (status) {
